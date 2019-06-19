@@ -8,14 +8,18 @@ from digitalio import DigitalInOut, Direction, Pull
 led = DigitalInOut(board.D13)
 led.direction = Direction.OUTPUT
 
-button = DigitalInOut(board.BUTTON_A)
-button.direction = Direction.INPUT
-button.pull = Pull.DOWN
+buttonA = DigitalInOut(board.BUTTON_A)
+buttonB = DigitalInOut(board.BUTTON_B)
+switch = DigitalInOut(board.SLIDE_SWITCH)
+buttonA.direction = Direction.INPUT
+buttonB.direction = Direction.INPUT
+switch.direction = Direction.INPUT
+buttonA.pull = Pull.DOWN
+buttonB.pull = Pull.DOWN
+switch.pull = Pull.UP
 
 while True:
-    if button.value:  # button is pushed
+    if buttonA.value and buttonB.value and switch.value:  # button is pushed
         led.value = True
     else:
         led.value = False
-
-    time.sleep(0.01)
